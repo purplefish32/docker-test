@@ -1,0 +1,22 @@
+#nginx:
+  #image: nginx
+  #volumes:
+   # - src/web:/usr/share/nginx/html
+  #ports: 
+   # - "8899:80"
+  #links: 
+   # - db
+   # - node
+
+node:
+  build: docker/node
+  volumes:
+    - .:/usr/src/app
+  ports: 
+    - "1188:8080"
+  command: npm start
+  links: 
+    - db
+
+db:
+  image: mongo:2.6
